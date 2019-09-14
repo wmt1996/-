@@ -1,0 +1,5 @@
+import ssl
+
+request = urllib.request.Request(url='...', headers={...}) 
+context = ssl._create_unverified_context()
+web_page = urllib.request.urlopen(request, context=context)
