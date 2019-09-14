@@ -1,5 +1,13 @@
+SSL相关问题。在使用urlopen打开一个HTTPS链接时会验证一次SSL证书，如果不做出处理会产生错误提示“SSL: CERTIFICATE_VERIFY_FAILED”，可以通过以下两种方式加以解决：
+
+使用未经验证的上下文
 import ssl
 
 request = urllib.request.Request(url='...', headers={...}) 
 context = ssl._create_unverified_context()
 web_page = urllib.request.urlopen(request, context=context)
+
+设置全局性取消证书验证
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
